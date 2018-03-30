@@ -1,11 +1,13 @@
 const path = require("path")
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
 	entry: "./src/index.js",
 	output: {
 		filename: "bundle.js",
-		path: path.join(__dirname, "dist/assets")
+		path: path.join(__dirname, "dist")
 	},
 	devServer: {
 		contentBase: path.join(__dirname, "dist"),
@@ -51,6 +53,7 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new ExtractTextPlugin('style.css')
+		new ExtractTextPlugin('style.css'),
+		new HtmlWebpackPlugin({template: 'src/index.html'})
 	]
 }
