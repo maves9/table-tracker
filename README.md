@@ -2,7 +2,7 @@
 
 Remember to `npm install` or `yarn install`
 
-## custom made commands
+## Custom made commands
 `npm run dev`
 `npm run build`
 `npm run debug`
