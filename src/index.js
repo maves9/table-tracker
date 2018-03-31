@@ -3,7 +3,14 @@ import ReactDOM from 'react-dom'
 import SidePanel from './partials/side-panel'
 import './style.scss'
 
-class App extends React.Component {
+import Edit from './pages/edit'
+import Maps from './pages/maps'
+import Dashboard from './pages/dashboard'
+
+
+import { BrowserRouter as Router, IndexRoute,  Route, Link, hashHistory } from "react-router";
+
+class Layout extends React.Component {
 	render() {
 		return (
 				<SidePanel />
@@ -11,4 +18,13 @@ class App extends React.Component {
 	}
 }
 
-ReactDOM.render(<App />, document.querySelector('[data-js=react-container]'))
+ReactDOM.render(
+	<Router hashHistory={hashHistory}>
+		<Route path="/" component={Layout} >
+			<IndexRoute component={Dashboard}/>
+			<Route path="/edit" component={Edit} />
+			<Route path="/maps" component={Maps} />
+		</Route>
+	</Router>
+	, document.querySelector('[data-js=react-container]')
+)
