@@ -11,4 +11,4 @@ class App extends React.Component {
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('react-container'))
+ReactDOM.render(<App />, document.querySelector('[data-js=react-container]'))
