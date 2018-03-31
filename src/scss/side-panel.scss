@@ -1,0 +1,68 @@
+$circle-btn-size: 50px;
+
+
+#control-panel{
+
+  position: fixed;
+  height: 100%;
+
+  &:hover .close-panel-btn{opacity: 1;}
+
+  .close-panel-btn{
+    opacity: 0;
+    width: $circle-btn-size;
+    height: $circle-btn-size;
+    position: absolute;
+    margin: auto;
+    bottom: 0;
+    top: 0;
+    right: -$circle-btn-size / 2;
+    transition: ease-in-out .3s all;
+  }
+
+  .footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    a{
+      margin-left: 1em;
+    }
+  }
+
+  .control-list-item{
+    padding: 0.5em 1em;
+
+    .control-list-header{
+      min-height: 50px;
+      button{
+        position: absolute;
+        right: 1em;
+      }
+    }
+    & + .control-list-item{
+      border-top: solid 1px #eee;
+    }
+
+  }
+
+  .side-panel-control-list{
+
+  }
+  .side-panel-time{
+    margin: 0;
+    padding: 10px;
+    time{
+      margin: 0;
+      display: block;
+    }
+  }
+
+  .option-container{
+    transition: .4s all ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+}

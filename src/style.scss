@@ -1,0 +1,37 @@
+@import "libs/materialize-src/sass/materialize";
+.h1 {font-size: 4.2rem;line-height: 110%;margin: 2.8rem 0 1.68rem 0;}
+.h2 {font-size: 3.56rem;line-height: 110%;margin: 2.3733333333rem 0 1.424rem 0;}
+.h3 {font-size: 2.92rem;line-height: 110%;margin: 1.9466666667rem 0 1.168rem 0;}
+.h4 {font-size: 2.28rem;line-height: 110%;margin: 1.52rem 0 .912rem 0;}
+.h5 {font-size: 1.64rem;line-height: 110%;margin: 1.0933333333rem 0 .656rem 0;}
+.h6 {font-size: 1.15rem;line-height: 110%;margin: .7666666667rem 0 .46rem 0;}
+
+@import "scss/side-panel";
+
+.btn-plus{
+  position: relative;
+  span{
+    position: absolute;
+    background: #fff;
+    height: 24px;
+    width: 2px;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 15px;
+    transition: .4s all ease-out;
+    &:nth-child(1) {
+      transform: rotate(90deg);
+    }
+    &:nth-child(2){
+      transform: rotate(0deg);
+    }
+  }
+  &.to-minus{
+    span:nth-child(2){
+      transform: rotate(90deg);
+    }
+  }
+}
