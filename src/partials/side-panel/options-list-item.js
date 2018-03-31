@@ -25,19 +25,19 @@ export default class ListItem extends Component {
 		}
 
 		return (
-				<li className="control-list-item h6">
-					<div className="control-list-header">
-					Active Units
-						<button onClick={this.toggleExpand}
-										className={btnClasses.join(' ') }>
-							<span></span>
-							<span></span>
-						</button>
-					</div>
+			<li className="control-list-item h6">
+				<div className="control-list-header">
+				{this.props.title}
+					<button onClick={this.toggleExpand}
+									className={btnClasses.join(' ') }>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
 
-          {this.props.getOption()}
+        {this.props.getOption()}
 
-				</li>
+			</li>
 		)
 	}
 }
