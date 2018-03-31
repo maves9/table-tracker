@@ -4,7 +4,7 @@ export default class ListItem extends Component {
 
 	constructor(props) {
 		super(props)
-		this.state = {toggleExpand: false}
+		this.state = {toggleExpand: false, optionContainerHeight: 0}
 		this.toggleExpand = this.toggleExpand.bind(this)
 	}
 
@@ -12,7 +12,20 @@ export default class ListItem extends Component {
 		this.setState(prevState => ({
       toggleExpand: !prevState.toggleExpand
     }));
+
+    if (this.state.toggleExpand === false) {
+      this.state.optionContainerHeight = this.optionContainer.scrollHeight
+    }else {
+      this.state.optionContainerHeight = 0
+    }
+
 	}
+  componentDidMount() {
+    if (this.state.toggleExpand) {
+      this.state.optionContainerHeight = this.optionContainer.scrollHeight
+    }
+  }
+
 
 	render() {
 
@@ -35,8 +48,10 @@ export default class ListItem extends Component {
 					</button>
 				</div>
 
-        {this.props.getOption()}
 
+        <div className="option-container" ref={element => this.optionContainer = element} style={{maxHeight: this.state.optionContainerHeight+"px"}}>
+          {this.props.getOption()}
+        </div>
 			</li>
 		)
 	}

@@ -42,7 +42,7 @@ $circle-btn-size: 50px;
       }
     }
     & + .control-list-item{
-      border-bottom: solid 1px #eee;
+      border-top: solid 1px #eee;
     }
 
   }
@@ -59,13 +59,10 @@ $circle-btn-size: 50px;
     }
   }
 
-  .main-container{
+  .option-container{
     transition: .4s all ease-in-out;
     max-height: 0;
     overflow: hidden;
-    &.active{
-      max-height: 51px;
-    }
   }
 
 }
