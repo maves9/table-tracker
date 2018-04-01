@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Header from './side-panel/header'
-import Options from './side-panel/options'
-import Footer from './side-panel/footer'
 import Resizable from 'react-resizable-box'
+import Header from './header'
+import Options from './options'
+import Footer from './footer'
 
 class SidePanel extends Component {
 

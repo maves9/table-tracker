@@ -7,10 +7,6 @@ import Edit from './pages/edit'
 import Maps from './pages/maps'
 import Dashboard from './pages/dashboard'
 
-const edit = () => (
-  <Edit />
-);
-
 
 import { BrowserRouter, Route, Switch, BrowserHistory } from 'react-router-dom'
 
