@@ -7,11 +7,14 @@ module.exports = {
 	entry: "./src/index.js",
 	output: {
 		filename: "bundle.js",
-		path: path.join(__dirname, "dist")
+		path: path.join(__dirname, "dist"),
+		publicPath: "/"
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "dist"),
-		port: 8887
+		port: 8888,
+		historyApiFallback: {
+			index: "404.html"
+		}
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, IndexRoute,  Route, Link, hashHistory } from "react-router";
+import Link from "react-router-dom";
 
 export default class Edit extends React.Component {
 	render() {
