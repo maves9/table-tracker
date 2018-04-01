@@ -7,7 +7,19 @@
 .h6 {font-size: 1.15rem;line-height: 110%;margin: .7666666667rem 0 .46rem 0;}
 
 @import "scss/side-panel";
+.main-container{
+  position: fixed;
+  height: 100%;
+  width: 100%;
 
+  .map-container{
+    width: 100%;
+    height: 100%;
+    #active-map{
+      height: 100%;
+    }
+  }
+}
 .btn-plus{
   position: relative;
   span{

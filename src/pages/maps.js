@@ -4,7 +4,7 @@ import { BrowserRouter as Router, IndexRoute,  Route, Link, hashHistory } from "
 export default class Maps extends React.Component {
 	render() {
 		return (
-				<main>maps</main>
+				<main className="main-container white-text grey darken-4">maps</main>
 		)
 	}
 }

@@ -4,7 +4,7 @@ import Link from "react-router-dom";
 export default class Edit extends React.Component {
 	render() {
 		return (
-				<main>edit</main>
+				<main className="main-container white-text grey darken-4">edit</main>
 		)
 	}
 }
