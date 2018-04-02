@@ -4,7 +4,7 @@ import Dot from "./partials/edit/dot"
 import Map from './partials/map/active-map'
 
 
-let dotData = JSON.parse(localStorage.getItem("dots")) || []
+let dotData = JSON.parse(localStorage.getItem("units")) || []
 
 export default class Edit extends React.Component {
 	constructor(){
@@ -31,14 +31,14 @@ export default class Edit extends React.Component {
 		let y = dot.coords.y
 
 		return (
-		<Dot key={i}
-				 index={i}
-				 left={ x + 'px'}
-				 top={ y + 'px'}
-				 remove={this.removeDot}
-				 />
-		)
-	}
+			<Dot key={i}
+					 index={i}
+					 left={ x + 'px'}
+					 top={ y + 'px'}
+					 remove={this.removeDot}
+					 />
+			)
+		}
 	}
 	newDot(){
 		let dots = this.state.dots
@@ -56,8 +56,9 @@ export default class Edit extends React.Component {
 		dotData.dots = []
 		for (let li in children) {
 			if (children[li].attributes) {
-
-
+				//
+				//slice transform attribute from li
+				//
 				let attr = children[li].attributes
 				let styleValue = attr.style.nodeValue
 
@@ -80,7 +81,7 @@ export default class Edit extends React.Component {
 			}
 		}
 		alert('saved')
-		localStorage.setItem("dots", JSON.stringify(dotData));
+		localStorage.setItem("units", JSON.stringify(dotData));
 	}
 
 	render() {

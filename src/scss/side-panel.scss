@@ -4,7 +4,7 @@ $circle-btn-size: 50px;
   position: fixed;
   height: 100%;
 
-  &:hover .close-panel-btn{opacity: 1;}
+  &:hover .close-panel-btn{opacity: 1; display: none;}
 
   .close-panel-btn{
     opacity: 0;
