@@ -15,15 +15,15 @@ export default class Dashboard extends React.Component {
 		}
 		this.readDots = this.readDots.bind(this)
 	}
-	readDots(){
-		console.log(this);
-			if (this) {
+	readDots( item, i ){
 
-			let x = dot.coords
-			let y = dot.coords
+		if ( item ) {
+
+			let x = item.coords.x
+			let y = item.coords.y
 
 			return (
-			<Dot key={i}
+			<DotItem key={i}
 					 index={i}
 					 left={ x + 'px'}
 					 top={ y + 'px'}
@@ -36,13 +36,13 @@ export default class Dashboard extends React.Component {
 		return (
 				<main className="main-container grey darken-4">
 				<div className="overlay-container">
+				<ul className="dot-container" ref={this.dotContainer}>
+				{this.state.dots.map(this.readDots)}
+				</ul>
 					<SidePanel />
 				</div>
-				<ul className="dot-container" ref={this.dotContainer}>
 
-					{this.state.dots.map(this.readDots)}
 
-				</ul>
 				<Map src={imageSrc}/>
 				</main>
 		)
