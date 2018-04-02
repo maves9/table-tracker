@@ -5,11 +5,27 @@ export default class AllUnits extends Component {
 	render() {
 
 		return (
-			<ul className="active-units-list">
-				<li>test 1</li>
-				<li>test 2</li>
-				<li>test 3</li>
-			</ul>
+			<table>
+        <thead>
+          <tr>
+              <th>Unit</th>
+              <th>Time</th>
+              <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alvin</td>
+            <td>Eclair</td>
+            <td>$0.87</td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+          </tr>
+        </tbody>
+      </table>
 		)
 	}
 }

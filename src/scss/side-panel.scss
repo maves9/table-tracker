@@ -28,15 +28,27 @@ $circle-btn-size: 50px;
       margin-left: 1em;
     }
   }
+  .options-list{
+    overflow-y: auto;
+    max-height: 73%;
+  }
 
   .control-list-item{
     padding: 0.5em 1em;
-
+    position: relative;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    transition: all .4s ease-in-out;
+    .control-list-title{
+      margin: 0;
+      padding-top: 1em;
+    }
     .control-list-header{
       min-height: 50px;
       button{
         position: absolute;
         right: 1em;
+        top: 1em;
       }
     }
     & + .control-list-item{
@@ -56,11 +68,20 @@ $circle-btn-size: 50px;
       display: block;
     }
   }
-
   .option-container{
     transition: .4s all ease-in-out;
     max-height: 0;
     overflow: hidden;
+    margin: 1em -1em 0em -1em;
+    .col.s12{
+      padding: 0
+    }
+    .row{
+      padding: 0em 0.75em;
+    }
+    .input-field{
+        margin: 0;
+        padding: 0;
+    }
   }
-
 }

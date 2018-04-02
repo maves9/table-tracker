@@ -10,7 +10,7 @@ export default class Options extends Component {
 	render() {
 
 		return (
-      <div className="header">
+      <div className="options-list">
 		    <ul>
 					<ListItem title="Active units" getOption={() => (<ActiveUnits />)}/>
 					<ListItem title="All units" getOption={() => (<AllUnits />)}/>

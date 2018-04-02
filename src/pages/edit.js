@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import Dot from "./partials/edit/dot"
 import Map from './partials/map/active-map'
 
+
 let dotData = JSON.parse(localStorage.getItem("dots")) || []
 
 export default class Edit extends React.Component {
@@ -24,18 +25,24 @@ export default class Edit extends React.Component {
 		this.setState({dots: dots})
 	}
 	readDots(dot, i){
+		if (this) {
+
+		let x = dot.coords.x
+		let y = dot.coords.y
+
 		return (
 		<Dot key={i}
-				index={i}
-				left={dot.x + 'px'}
-				top={dot.y + 'px'}
-				remove={this.removeDot}
-				/>
+				 index={i}
+				 left={ x + 'px'}
+				 top={ y + 'px'}
+				 remove={this.removeDot}
+				 />
 		)
+	}
 	}
 	newDot(){
 		let dots = this.state.dots
-		dots.push({ x: 23, y: 45})
+		dots.push({coords:{ x: 23, y: 45}})
 		this.setState({dots: dots})
 	}
 	clearDots(){
@@ -48,13 +55,29 @@ export default class Edit extends React.Component {
 		let dotData = {}
 		dotData.dots = []
 		for (let li in children) {
+			if (children[li].attributes) {
+
+
 				let attr = children[li].attributes
-				if (attr && attr.top && attr.left) {
-					let x = parseInt(attr.top.nodeValue)
-					let y = parseInt(attr.left.nodeValue)
-					let dot = { coords: { x: x, y: y } }
-					dotData.dots[li] = dot
-				}
+				let styleValue = attr.style.nodeValue
+
+				let index = styleValue.lastIndexOf("transform")
+				let transformValue = styleValue.slice(index, styleValue.lastIndexOf(")", index) )
+
+				let translateValues = transformValue.slice(
+					transformValue.indexOf('(') + 1,
+					transformValue.indexOf(')')
+				)
+
+				let translateValuesArr = translateValues.split(",")
+
+				let x = parseInt( translateValuesArr[0] )
+				let y = parseInt( translateValuesArr[1] )
+
+				let dot = { coords: { x: x, y: y } }
+
+				dotData.dots[li] = dot
+			}
 		}
 		alert('saved')
 		localStorage.setItem("dots", JSON.stringify(dotData));
@@ -66,14 +89,18 @@ export default class Edit extends React.Component {
 			<Map/>
 			<div className="overlay-container">
 				<h1>Edit</h1>
-				<Link to={'/'}>back to dashboard</Link>
-				<ul ref={this.dotContainer}>
+
+				<ul className="dot-container" ref={this.dotContainer}>
+
 					{this.state.dots.map(this.readDots)}
+
 				</ul>
 				<div className="controls grey darken-4">
-					<button onClick={this.saveDots} className="btn">Save</button>
-					<button onClick={this.newDot} className="btn">New unit</button>
-					<button onClick={this.clearDots} className="btn">Clear all units</button>
+
+				<Link to={'/'}>back to dashboard</Link>
+					<button onClick={this.saveDots} className="btn waves-effect waves-light">Save</button>
+					<button onClick={this.newDot} className="btn waves-effect waves-light">New unit</button>
+					<button onClick={this.clearDots} className="btn waves-effect waves-light">Clear all units</button>
 				</div>
 				</div>
 			</main>

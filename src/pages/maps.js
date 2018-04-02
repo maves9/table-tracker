@@ -65,14 +65,20 @@ export default class Maps extends React.Component {
 	render() {
 		return (
 				<main className="main-container white-text grey darken-4">
-					<Link to={'/'}>back to dashboard</Link>
+
 					<h1>maps</h1>
+
 					<ul ref={this.mapListContainer} >
 						{this.state.mapList.map(this.readMaps)}
 					</ul>
-					<input type="text" ref={this.textInput} className="white-text" placeholder="Enter image URL here" />
-					<button onClick={this.getMap} className="btn">Get map</button>
-					<button onClick={this.saveMaps} className="btn">Save</button>
+
+					<div className="controls grey darken-4">
+						<Link to={'/'}>back to dashboard</Link>
+							<input type="text" ref={this.textInput} className="white-text" placeholder="Enter image URL here" />
+							<button onClick={this.getMap} className="btn">Get map</button>
+							<button onClick={this.saveMaps} className="btn">Save</button>
+					</div>
+					
 				</main>
 			)
 	}
