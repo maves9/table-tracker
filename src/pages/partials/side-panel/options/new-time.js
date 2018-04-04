@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import Clock from 'react-live-clock'
 
+let dotData = JSON.parse(localStorage.getItem('units'))
+
 export default class NewTime extends Component {
+	constructor(){
+		super()
+		this.newTime = this.newTime.bind(this)
+	}
+
+	newTime(){
+
+	}
 
 	render() {
 
@@ -11,20 +21,19 @@ export default class NewTime extends Component {
 
 				<div className="row">
 					<div className="input-field col s12">
-						<input id="email" type="text" className="validate white-text" placeholder="Person" />
-						<span className="helper-text" data-error="wrong" data-success="right">Helper text</span>
+						<input type="text" className="validate white-text" placeholder="Name" />
 					</div>
 				</div>
 					<div className="row">
 					<div className="input-field col s12">
-						<input id="last_name" placeholder="Placeholder" type="date" className="validate white-text" />
+						<input placeholder="Placeholder" type="date" className="validate white-text" />
 					</div>
 						<div className="input-field col s6">
-							<input placeholder="Placeholder" id="first_name" type="time" className="validate white-text" />
+							<input placeholder="Placeholder" type="time" className="validate white-text" />
 						</div>
 					</div>
 
-					<button className="btn">Submit</button>
+					<button onClick={this.newTime} className="btn">Submit</button>
 				</form>
 			</div>
 		)

@@ -26,8 +26,8 @@ export default class Dot extends Component {
 		}
 		return (
 
-  			<li style={dotStyle}>
-				
+  			<li style={dotStyle} className="z-depth-3 circle dot">
+
 					<div className="dot teal accent-3 circle" onClick={this.toggleModal}></div>
 
 					<div className={modalClasses.join(' ')}>

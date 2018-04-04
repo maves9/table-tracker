@@ -1,5 +1,8 @@
 $circle-btn-size: 50px;
 
+
+
+
 #control-panel{
   position: fixed;
   height: 100%;
@@ -31,6 +34,16 @@ $circle-btn-size: 50px;
   .options-list{
     overflow-y: auto;
     max-height: 73%;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #fff;
+      border-radius: 4px;
+    }
   }
 
   .control-list-item{

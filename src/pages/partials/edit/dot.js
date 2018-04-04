@@ -8,17 +8,17 @@ export default class Dot extends Component {
 
     this.state = {
       togglePulse: false,
-			dragging: false
+			dragging: false,
+			active: false
     }
-    this.toggleModal = this.toggleModal.bind(this)
-		this.handleStop =this.handleStop.bind(this)
-		this.handleStart =this.handleStart.bind(this)
+    this.toggleActive = this.toggleActive.bind(this)
+		this.handleStop = this.handleStop.bind(this)
+		this.handleStart = this.handleStart.bind(this)
 	}
-  toggleModal(){
+  toggleActive( i ){
 
   }
 	handleStart(){
-
 
 	}
 	handleStop(){
@@ -61,7 +61,7 @@ export default class Dot extends Component {
         onStop={this.handleStop}
         >
 
-  			<li className={dotClasses.join(' ')} onClick={this.toggleModal}>
+  			<li className={dotClasses.join(' ')} onClick={() => this.props.toggleActive(this.props.index)}>
           <div className="dot-modal">
             <button className="btn red btn-small" onClick={() => this.props.remove(this.props.index)}>Delete</button>
           </div>

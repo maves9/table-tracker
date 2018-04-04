@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import Dot from "./partials/edit/dot"
 import Map from './partials/map/active-map'
-
+import DotModal from "./partials/edit/dot-modal"
 
 let dotData = JSON.parse(localStorage.getItem("units")) || []
 
@@ -10,21 +10,37 @@ export default class Edit extends React.Component {
 	constructor(){
 		super()
 		this.state = {
-			dots: dotData.dots
+			dots: dotData.dots,
+			activeDotToggle: false,
+			activeDotIndex: -1,
+			editModalOpen: false
 		}
 		this.readDots = this.readDots.bind(this)
 		this.newDot = this.newDot.bind(this)
 		this.clearDots = this.clearDots.bind(this)
 		this.saveDots = this.saveDots.bind(this)
 		this.removeDot = this.removeDot.bind(this)
+		this.toggleActiveUnit = this.toggleActiveUnit.bind(this)
 		this.dotContainer = React.createRef()
+
+		this.editDot = this.editDot.bind(this)
 	}
-	removeDot(i){
-		let dots = this.state.dots
-		dots.splice(i, 1)
-		this.setState({dots: dots})
+	componentWillUpdate(){
+		this.saveDots()
+	}
+
+	toggleActiveUnit(i){
+		this.setState( {activeDotToggle: true, activeDotIndex: i} )
+	}
+	removeDot(){
+	let dots = this.state.dots,
+			i = this.state.activeDotIndex
+			dotData.dots = dots.splice(i, 1)
+			localStorage.setItem("units", JSON.stringify(dotData) )
+			this.setState({ dots: dotData.dots })
 	}
 	readDots(dot, i){
+
 		if (this) {
 
 		let x = dot.coords.x
@@ -36,13 +52,17 @@ export default class Edit extends React.Component {
 					 left={ x + 'px'}
 					 top={ y + 'px'}
 					 remove={this.removeDot}
+					 toggleActive={this.toggleActiveUnit}
 					 />
 			)
 		}
 	}
 	newDot(){
 		let dots = this.state.dots
-		dots.push({coords:{ x: 23, y: 45}})
+		dots.push({
+			name: "Unit" + this.state.dots.length,
+			coords:{ x: 45, y: 45}
+		})
 		this.setState({dots: dots})
 	}
 	clearDots(){
@@ -80,13 +100,33 @@ export default class Edit extends React.Component {
 				dotData.dots[li] = dot
 			}
 		}
-		alert('saved')
 		localStorage.setItem("units", JSON.stringify(dotData));
 	}
 
+	editDot(){
+		this.setState(prevState => ({
+	      editModalOpen: !prevState.editModalOpen
+	  }));
+	}
+
 	render() {
+		let editBtnClasses = ["btn"],
+				state = this.state,
+				dots = state.dots,
+				index = state.activeDotIndex
+
+		if (!state.activeDotToggle) {
+			editBtnClasses.push("hide")
+		}
+
 		return (
 			<main className="main-container white-text grey darken-4">
+			{state.editModalOpen
+				?
+				<DotModal obj={dots[index]} closeModal={this.editDot} removeDot={this.removeDot}/>
+				:
+				null
+			}
 			<Map/>
 			<div className="overlay-container">
 				<h1>Edit</h1>
@@ -97,11 +137,11 @@ export default class Edit extends React.Component {
 
 				</ul>
 				<div className="controls grey darken-4">
-
-				<Link to={'/'}>back to dashboard</Link>
+					<Link to={'/'}>back to dashboard</Link>
 					<button onClick={this.saveDots} className="btn waves-effect waves-light">Save</button>
 					<button onClick={this.newDot} className="btn waves-effect waves-light">New unit</button>
 					<button onClick={this.clearDots} className="btn waves-effect waves-light">Clear all units</button>
+					<button onClick={this.editDot} className={editBtnClasses.join(' ')}>Edit unit</button>
 				</div>
 				</div>
 			</main>
