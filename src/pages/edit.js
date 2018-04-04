@@ -20,19 +20,31 @@ export default class Edit extends React.Component {
 		this.clearDots = this.clearDots.bind(this)
 		this.saveDots = this.saveDots.bind(this)
 		this.removeDot = this.removeDot.bind(this)
-		this.toggleActiveUnit = this.toggleActiveUnit.bind(this)
 		this.dotContainer = React.createRef()
-
+		this.toggleActiveUnit = this.toggleActiveUnit.bind(this)
 		this.editDot = this.editDot.bind(this)
 	}
 	componentWillUpdate(){
 		this.saveDots()
+		dotData = JSON.parse(localStorage.getItem("units"))
 	}
 
-	toggleActiveUnit(i){
-		this.setState( {activeDotToggle: true, activeDotIndex: i} )
+	toggleActiveUnit(e){
+
+		let bool = true
+
+		let i = e.target.dataset.i
+
+		if (e.target.nodeName === "UL") {
+			i = -1
+			bool = false
+		}
+
+		this.setState( {activeDotToggle: bool, activeDotIndex: i} )
+
 	}
 	removeDot(){
+
 	let dots = this.state.dots,
 			i = this.state.activeDotIndex
 			dotData.dots = dots.splice(i, 1)
@@ -110,6 +122,7 @@ export default class Edit extends React.Component {
 	}
 
 	render() {
+
 		let editBtnClasses = ["btn"],
 				state = this.state,
 				dots = state.dots,
@@ -130,8 +143,7 @@ export default class Edit extends React.Component {
 			<Map/>
 			<div className="overlay-container">
 				<h1>Edit</h1>
-
-				<ul className="dot-container" ref={this.dotContainer}>
+				<ul className="dot-container" onClick={this.toggleActiveUnit} ref={this.dotContainer}>
 
 					{this.state.dots.map(this.readDots)}
 

@@ -27,7 +27,6 @@ export default class Dot extends Component {
 				togglePulse: !prevState.togglePulse
 			})
 		)
-
 		setTimeout(function() {
 			this.setState(
 				prevState => ({
@@ -35,7 +34,6 @@ export default class Dot extends Component {
 				})
 			)
 		}.bind(this), 400 )
-
 	}
 	render() {
 
@@ -52,6 +50,8 @@ export default class Dot extends Component {
       y: parseInt(this.props.top)
     }
 
+		const i = this.props.index
+
 		return (
       <Draggable
         handle=".handle-draggable"
@@ -61,9 +61,9 @@ export default class Dot extends Component {
         onStop={this.handleStop}
         >
 
-  			<li className={dotClasses.join(' ')} onClick={() => this.props.toggleActive(this.props.index)}>
+  			<li className={ dotClasses.join(' ') } data-i={ i }>
           <div className="dot-modal">
-            <button className="btn red btn-small" onClick={() => this.props.remove(this.props.index)}>Delete</button>
+            <button className="btn red btn-small" onClick={() => this.props.remove(i)}>Delete</button>
           </div>
         </li>
       </Draggable>

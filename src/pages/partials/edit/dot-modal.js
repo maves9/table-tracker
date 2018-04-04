@@ -11,7 +11,7 @@ export default class DotModal extends Component {
     }
     this.closeModal = this.closeModal.bind(this)
     this.nameInput = React.createRef()
-
+        
 	}
 
   closeModal(){
@@ -19,7 +19,6 @@ export default class DotModal extends Component {
     dot.name = this.nameInput.current.value
     this.props.closeModal(dot)
   }
-
 
 	render() {
 
@@ -36,7 +35,7 @@ export default class DotModal extends Component {
                       <button className="btn btn-small" onClick={this.closeModal}>Close</button>
                   </div>
                   <div className="col s6">
-                      <button className="btn red btn-small right" onClick={this.closeModal}>Delete Unit</button>
+                      <button className="btn red btn-small right" onClick={this.props.removeDot}>Delete Unit</button>
                   </div>
                 </div>
               </div>
