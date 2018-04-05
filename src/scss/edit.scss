@@ -7,12 +7,8 @@
   .dot-edit-modal{
     max-width: 600px;
     margin: 2em auto auto auto;
-
     .dot-edit-modal-footer{
       padding-bottom: 0.75em;
-      button + button{
-        margin-left: 0.75em; 
-      }
     }
   }
 }

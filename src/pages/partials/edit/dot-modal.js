@@ -6,18 +6,26 @@ export default class DotModal extends Component {
 		super(props)
 
     this.state = {
-      closeModal: false,
-      inputValue: ""
+      closeModal: false
     }
+
     this.closeModal = this.closeModal.bind(this)
     this.nameInput = React.createRef()
-        
+	}
+	componentDidMount(){
+		this.setState({ inputValue: this.props.obj.name })
 	}
 
-  closeModal(){
+  closeModal(e){
+
     let dot = this.props.obj
+
     dot.name = this.nameInput.current.value
-    this.props.closeModal(dot)
+
+    this.props.toggleModal(e, dot)
+
+		this.setState({inputValue: dot.name})
+
   }
 
 	render() {
@@ -27,7 +35,7 @@ export default class DotModal extends Component {
               <div className="dot-edit-modal grey darken-4 card">
                 <div className="row">
                   <div className="input-field col s12">
-                    <input ref={this.nameInput} placeholder="Unit name" defaultValue={this.props.obj.name} type="text" className="validate white-text" />
+                    <input ref={this.nameInput} placeholder="Unit name" defaultValue={this.state.inputValue} type="text" className="validate white-text" />
                   </div>
                 </div>
                 <div className="row dot-edit-modal-footer">

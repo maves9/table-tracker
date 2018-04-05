@@ -11,16 +11,11 @@ export default class Dot extends Component {
 			dragging: false,
 			active: false
     }
-    this.toggleActive = this.toggleActive.bind(this)
+
 		this.handleStop = this.handleStop.bind(this)
-		this.handleStart = this.handleStart.bind(this)
-	}
-  toggleActive( i ){
-
-  }
-	handleStart(){
 
 	}
+
 	handleStop(){
 		this.setState(
 			prevState => ({
@@ -38,7 +33,7 @@ export default class Dot extends Component {
 	render() {
 
 		let modalClasses = ["control-list-modal", "h6"]
-		let dotClasses = ["dot", "teal", "accent-3", "circle", "handle-draggable", "z-depth-3"]
+		let dotClasses = ["dot", "teal", "accent-3", "circle", "handle-draggable", "z-depth-3", "show"]
 		//modalClasses.push("blue-grey", "darken-2")
 
 		if(this.state.togglePulse){
@@ -59,6 +54,7 @@ export default class Dot extends Component {
         position={null}
         onStart={this.handleStart}
         onStop={this.handleStop}
+				bounds="parent"
         >
 
   			<li className={ dotClasses.join(' ') } data-i={ i }>

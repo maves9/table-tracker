@@ -72,13 +72,13 @@ export default class Maps extends React.Component {
 						{this.state.mapList.map(this.readMaps)}
 					</ul>
 
-					<div className="controls grey darken-4">
+					<div className="controls map-controls blue-grey darken-4">
 						<Link to={'/'}>back to dashboard</Link>
 							<input type="text" ref={this.textInput} className="white-text" placeholder="Enter image URL here" />
 							<button onClick={this.getMap} className="btn">Get map</button>
 							<button onClick={this.saveMaps} className="btn">Save</button>
 					</div>
-					
+
 				</main>
 			)
 	}

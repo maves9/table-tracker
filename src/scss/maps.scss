@@ -4,16 +4,31 @@
   }
 }
 .dot{
-  position: absolute;
-  height: 2em;
-  width: 2em;
+  position: relative;
+  margin: 0.5em;
+  display: inline-block;
   .dot-modal{
     display: none;
-
+  }
+  height: 2em;
+  width: 2em;
+  &.show{
+    position: relative;
+    -webkit-animation: dot-show .4s ease-in-out;
+    animation: dot-show .4s ease-in-out;
+    animation-fill-mode: forwards;
   }
 }
-
-
+@keyframes dot-show {
+  from{ width: 0; height: 0; }
+  to{ height: 2em; width: 2em;}
+}
+.map-controls{
+  padding: 0.75em;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+}
 .dot-container{
     position: fixed;
     height: 100%;
