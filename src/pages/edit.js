@@ -50,7 +50,7 @@ export default class Edit extends React.Component {
 		let dots = this.state.dots,
 				i = this.state.activeDotIndex
 
-		dots.map((dot, i)=>{
+		dots.map( (dot, i) => {
 			if (id === dot.id) {
 				dots.splice(i , 1)
 			}
@@ -69,8 +69,8 @@ export default class Edit extends React.Component {
 
 		if (dot) {
 
-		let x = dot.coords.x
-		let y = dot.coords.y
+		let x = dot.coords.x,
+		 		y = dot.coords.y
 
 		return (
 			<Dot key={ i }
@@ -95,27 +95,26 @@ export default class Edit extends React.Component {
 			name: "Unit " + ( id + 1 ),
 			coords: { x: 45, y: 45}
 		})
-		this.setState({dots: dots})
+		this.setState({ dots: dots })
 	}
 	clearDots(){
-		let dots = this.state.dots
-		dots = []
-		this.setState({dots: dots})
+		this.setState({ dots: [] })
 	}
 	saveDots(){
-		let children = this.dotContainer.current.children
-		let dotData = {}
+		let children = this.dotContainer.current.children,
+		 		dotData = {}
+
 		dotData.dots = []
+
 		for (let li in children) {
 			if (children[li].attributes) {
 				//
 				// slice transform attribute from li
 				//
-				let attr = children[li].attributes
-				let styleValue = attr.style.nodeValue
-
-				let index = styleValue.lastIndexOf("transform")
-				let transformValue = styleValue.slice(index, styleValue.lastIndexOf(")", index) )
+				let attr = children[li].attributes,
+				 		styleValue = attr.style.nodeValue,
+				 		index = styleValue.lastIndexOf("transform"),
+				 		transformValue = styleValue.slice(index, styleValue.lastIndexOf(")", index) )
 
 				let translateValues = transformValue.slice(
 					transformValue.indexOf('(') + 1,
@@ -124,13 +123,11 @@ export default class Edit extends React.Component {
 
 				let translateValuesArr = translateValues.split(",")
 
-				let x = parseInt( translateValuesArr[0] )
-				let y = parseInt( translateValuesArr[1] )
-
-				let dot = { coords: { x: x, y: y } }
+				let x = parseInt( translateValuesArr[0] ),
+				 		y = parseInt( translateValuesArr[1] ),
+						dot = { coords: { x: x, y: y } }
 
 				dotData.dots[li] = dot
-
 			}
 		}
 
