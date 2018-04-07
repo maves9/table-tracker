@@ -26,16 +26,12 @@ export default class Dot extends Component {
 		}
 		return (
 
-  			<li style={dotStyle} className="z-depth-3 circle dot">
-
-					<div className="dot teal accent-3 circle" onClick={this.toggleModal}></div>
-
+  			<li style={dotStyle} className="z-depth-3 circle dot" onClick={this.props.setDotActive}>
+					<div data-i={this.props.index} className="dot teal accent-3 circle" onClick={this.toggleModal}></div>
 					<div className={modalClasses.join(' ')}>
 						<button className="btn red btn-small" onClick={this.toggleModal}>X</button>
 					</div>
-
         </li>
-
 		)
 	}
 }

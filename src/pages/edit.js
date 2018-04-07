@@ -15,14 +15,14 @@ export default class Edit extends React.Component {
 			activeDotIndex: -1,
 			editModalOpen: false
 		}
-		this.readDots = this.readDots.bind(this)
-		this.newDot = this.newDot.bind(this)
-		this.clearDots = this.clearDots.bind(this)
-		this.saveDots = this.saveDots.bind(this)
-		this.removeDot = this.removeDot.bind(this)
-		this.dotContainer = React.createRef()
+		this.readDots         = this.readDots.bind(this)
+		this.newDot           = this.newDot.bind(this)
+		this.clearDots        = this.clearDots.bind(this)
+		this.saveDots         = this.saveDots.bind(this)
+		this.removeDot        = this.removeDot.bind(this)
+		this.dotContainer     = React.createRef()
 		this.toggleActiveUnit = this.toggleActiveUnit.bind(this)
-		this.toggleModal = this.toggleModal.bind(this)
+		this.toggleModal      = this.toggleModal.bind(this)
 	}
 	componentDidUpdate(){
 		this.saveDots()
@@ -32,39 +32,45 @@ export default class Edit extends React.Component {
 	toggleActiveUnit(e){
 
 		let bool = true
-		let i = e.target.dataset.i
+		let id = e.target.dataset.id
 
 		if (e.target.nodeName === "UL") {
-			i = -1
+			id = -1
 			bool = false
 		}
 
-		this.setState( {activeDotToggle: bool, activeDotIndex: i} )
+		this.setState( {activeDotToggle: bool, activeDotIndex: id} )
 
 	}
-	removeDot(){
+	removeDot(id){
 		let dots = this.state.dots,
 				i = this.state.activeDotIndex
 
-		dots.splice(i, 1)
+		dots.map((dot, i)=>{
+			if (id === dot.id) {
+				dots.splice(i , 1)
+			}
+		})
+
 		dotData.dots = dots
 
 		this.setState( prevState => ({
 				editModalOpen: !prevState.editModalOpen,
-				dots: dotData.dots
+				dots: dotData.dots,
+				activeDotIndex: -1
 		}));
 	}
-	
+
 	readDots(dot, i){
 
-		if (this) {
+		if (dot) {
 
 		let x = dot.coords.x
 		let y = dot.coords.y
 
 		return (
 			<Dot key={ i }
-					 index={ i }
+					 obj={ dot }
 					 left={ x + 'px'}
 					 top={ y + 'px'}
 					 remove={this.removeDot}
@@ -74,10 +80,16 @@ export default class Edit extends React.Component {
 		}
 	}
 	newDot(){
-		let dots = this.state.dots
+		let dots = this.state.dots,
+				id = 0
+
+		if(this.state.dots !== undefined){
+			id = this.state.dots.length
+		}
 		dots.push({
-			name: "Unit " + this.state.dots.length,
-			coords:{ x: 45, y: 45}
+			id: id,
+			name: "Unit " + ( id + 1 ),
+			coords: { x: 45, y: 45}
 		})
 		this.setState({dots: dots})
 	}
@@ -121,15 +133,12 @@ export default class Edit extends React.Component {
 		//
 		// Apply dot names
 		//
+		dotData.dots.map((dot, i) => {
 
-		for (let obj in dotData.dots) {
+				dot.name = this.state.dots[i].name
+				dot.id = this.state.dots[i].id
 
-			if (obj.hasOwnProperty("name")) {
-
-				obj.name = this.state.dots[obj].name
-
-			}
-		}
+		})
 
 		localStorage.setItem("units", JSON.stringify(dotData));
 	}
@@ -171,7 +180,9 @@ export default class Edit extends React.Component {
 
 				<ul className="dot-container" onClick={this.toggleActiveUnit} ref={this.dotContainer}>
 
-					{this.state.dots.map(this.readDots)}
+					{state.dots !== undefined ?
+						state.dots.map(this.readDots) : null
+					}
 
 				</ul>
 				<div className="controls blue-grey darken-4">

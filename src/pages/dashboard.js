@@ -10,8 +10,15 @@ export default class Dashboard extends React.Component {
 
 		this.state = {
 			units: [],
-			imageSrc: ""
+			imageSrc: "",
+			activeDot: -1
 		}
+		this.setDotActive = this.setDotActive.bind(this)
+		this.readDots = this.readDots.bind(this)
+	}
+
+	componentWillMount(){
+
 		if (localStorage.getItem("units")) {
 			this.state.units = JSON.parse(localStorage.getItem("units"))
 		}
@@ -20,7 +27,6 @@ export default class Dashboard extends React.Component {
 			this.state.imageSrc = localStorage.getItem("activeMapSrc")
 		}
 
-		this.readDots = this.readDots.bind(this)
 	}
 	readDots( item, i ){
 
@@ -34,10 +40,13 @@ export default class Dashboard extends React.Component {
 					 index={ i }
 					 left={ x + 'px'}
 					 top={ y + 'px'}
-					 remove={ this.removeDot }
+					 setDotActive={ this.setDotActive }
 					 />
 			)
 		}
+	}
+	setDotActive(e){
+		this.setState({ activeDot: e.target.dataset.i })
 	}
 	render() {
 		const units = this.state.units.dots || []

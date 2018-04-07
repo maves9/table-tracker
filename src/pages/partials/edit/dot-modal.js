@@ -43,7 +43,7 @@ export default class DotModal extends Component {
                       <button className="btn btn-small" onClick={this.closeModal}>Close</button>
                   </div>
                   <div className="col s6">
-                      <button className="btn red btn-small right" onClick={this.props.removeDot}>Delete Unit</button>
+                      <button className="btn red btn-small right" onClick={() => this.props.removeDot(this.props.obj.id)}>Delete Unit</button>
                   </div>
                 </div>
               </div>
