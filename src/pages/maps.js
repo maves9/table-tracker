@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import MapItem from "./partials/map/map-list-item"
 
-let imageSrc = JSON.parse(localStorage.getItem("image")) || ""
-let mapList = JSON.parse(localStorage.getItem("mapList")) || []
-
 export default class Maps extends React.Component {
 	constructor(){
 		super()
 		this.state = {
-			mapList: mapList.maps
+			mapList: [],
+			activeMapSrc: ""
 		}
 		this.readMaps = this.readMaps.bind(this)
 		this.saveMaps = this.saveMaps.bind(this)
@@ -19,6 +17,20 @@ export default class Maps extends React.Component {
 		this.activate = this.activate.bind(this)
 		this.textInput = React.createRef()
 		this.mapListContainer = React.createRef()
+	}
+	componentWillMount(){
+		let src = localStorage.getItem("image"),
+				list = JSON.parse(localStorage.getItem("mapList"))
+
+		if (src !== null) {
+			this.setState({activeMapSrc: src })
+		}
+		if (list !== null) {
+			this.setState({mapList: list })
+		}
+	}
+	componentDidUpdate(){
+		this.saveMaps()
 	}
 
 	getMap(){
@@ -59,7 +71,6 @@ export default class Maps extends React.Component {
 					mapListData.maps[i] = mapItem
 				}
 		}
-		alert('saved')
 		localStorage.setItem("mapList", JSON.stringify(mapListData));
 	}
 	render() {

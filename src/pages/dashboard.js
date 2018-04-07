@@ -26,7 +26,7 @@ export default class Dashboard extends React.Component {
 		if (localStorage.getItem("activeMapSrc")) {
 			this.state.imageSrc = localStorage.getItem("activeMapSrc")
 		}
-
+console.log(this);
 	}
 	readDots( item, i ){
 
