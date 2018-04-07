@@ -18,15 +18,15 @@ export default class Dashboard extends React.Component {
 	}
 
 	componentWillMount(){
+		let units = JSON.parse(localStorage.getItem("units")),
+				mapSrc = localStorage.getItem("activeMapSrc")
 
-		if (localStorage.getItem("units")) {
-			this.state.units = JSON.parse(localStorage.getItem("units"))
+		if (units !== null) {
+			this.setState({ units: units })
 		}
-
-		if (localStorage.getItem("activeMapSrc")) {
-			this.state.imageSrc = localStorage.getItem("activeMapSrc")
+		if (mapSrc !== null) {
+			this.setState({ activeMapSrc: mapSrc })
 		}
-console.log(this);
 	}
 	readDots( item, i ){
 

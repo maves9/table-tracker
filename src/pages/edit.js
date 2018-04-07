@@ -4,13 +4,11 @@ import Dot from "./partials/edit/dot"
 import Map from './partials/map/active-map'
 import DotModal from "./partials/edit/dot-modal"
 
-let dotData = JSON.parse(localStorage.getItem("units")) || []
-
 export default class Edit extends React.Component {
 	constructor(){
 		super()
 		this.state = {
-			dots: dotData.dots,
+			dots: [],
 			activeDotToggle: false,
 			activeDotIndex: -1,
 			editModalOpen: false
@@ -24,9 +22,15 @@ export default class Edit extends React.Component {
 		this.toggleActiveUnit = this.toggleActiveUnit.bind(this)
 		this.toggleModal      = this.toggleModal.bind(this)
 	}
+	componentWillMount(){
+		let dotData = JSON.parse(localStorage.getItem("units"))
+
+		if (dotData !== null) {
+			this.setState({dots: dotData.dots})
+		}
+	}
 	componentDidUpdate(){
 		this.saveDots()
-		dotData = JSON.parse(localStorage.getItem("units"))
 	}
 
 	toggleActiveUnit(e){

@@ -87,7 +87,6 @@ export default class Maps extends React.Component {
 						<Link to={'/'}>back to dashboard</Link>
 							<input type="text" ref={this.textInput} className="white-text" placeholder="Enter image URL here" />
 							<button onClick={this.getMap} className="btn">Get map</button>
-							<button onClick={this.saveMaps} className="btn">Save</button>
 					</div>
 
 				</main>
