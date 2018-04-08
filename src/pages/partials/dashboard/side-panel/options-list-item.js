@@ -14,10 +14,11 @@ export default class ListItem extends Component {
     }));
 
     if (this.state.toggleExpand === false) {
-      this.state.optionContainerHeight = this.optionContainer.scrollHeight
+      this.state.optionContainerHeight = this.optionContainer.scrollHeight + "px"
     }else {
       this.state.optionContainerHeight = 0
     }
+
 
 	}
   componentDidMount() {
@@ -51,7 +52,7 @@ export default class ListItem extends Component {
 					</button>
 				</div>
 
-        <div className="option-container blue-grey darken-3" ref={element => this.optionContainer = element} style={{maxHeight: this.state.optionContainerHeight+"px"}}>
+        <div className="option-container blue-grey darken-3" ref={element => this.optionContainer = element} style={{maxHeight: this.state.optionContainerHeight}}>
           {this.props.getOption()}
         </div>
 			</li>

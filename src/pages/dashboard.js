@@ -67,7 +67,7 @@ export default class Dashboard extends React.Component {
 					<ul className="dot-container" onClick={this.setDotActive} ref={this.dotContainer}>
 						{units.map(this.readDots)}
 					</ul>
-					<SidePanel activeDotId={this.state.activeDot} />
+					<SidePanel activeDotId={this.state.activeDot} unitsObj={this.state.units.dots}/>
 				</div>
 				<Map src={imageSrc}/>
 			</main>

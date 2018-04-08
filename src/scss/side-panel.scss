@@ -107,3 +107,23 @@ width: 200px;
 .is-selected .datepicker-day-button{
   color: #fff
 }
+.option-all-units-list{
+  li + li {
+    margin-top: 0.5em;
+  }
+  margin: 0.5em;
+  .unit-list-item-header{
+    cursor: pointer;
+    padding: 0.5em;
+    margin: -0.5em;
+  }
+
+  .expand-container{
+    transition: .4s all ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+  .reservation-table{
+      margin: 0.5em 0;
+  }
+}
