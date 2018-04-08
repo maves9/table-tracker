@@ -88,12 +88,13 @@ export default class Edit extends React.Component {
 				id = 0
 
 		if(this.state.dots !== undefined){
-			id = this.state.dots.length
+			id = this.state.dots.length + 1
 		}
 		dots.push({
 			id: id,
-			name: "Unit " + ( id + 1 ),
-			coords: { x: 45, y: 45}
+			name: "Unit " + id ,
+			reservations: [],
+			coords: { x: 0, y: 0}
 		})
 		this.setState({ dots: dots })
 	}
@@ -138,7 +139,7 @@ export default class Edit extends React.Component {
 
 				dot.name = this.state.dots[i].name
 				dot.id = this.state.dots[i].id
-
+				dot.reservations = []
 		})
 
 		localStorage.setItem("units", JSON.stringify(dotData));

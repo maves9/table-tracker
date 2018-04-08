@@ -4,30 +4,26 @@ export default class Dot extends Component {
 
 	constructor(props) {
 		super(props)
-    this.state = {
-      toggleModal: false
-    }
-    this.toggleModal = this.toggleModal.bind(this)
+
 	}
-  toggleModal(){
-    this.setState(prevState => ({
-      toggleModal: !prevState.toggleModal
-    }));
-  }
 
 	render() {
-    const dotStyle = {
+
+		let props = this.props
+
+		const dotStyle = {
       transform: "translate(" + parseInt(this.props.left) + "px , "+parseInt(this.props.top) + "px )"
     };
-		const modalClasses = ["dot-modal", "grey", "darken-4", "white-text"]
+		const modalClasses = ["dot-modal", "grey", "darken-4", "white-text"],
+					dotClasses   = ["z-depth-3", "circle", "dot", "green"]
 
-		if (this.state.toggleModal) {
+		if (props.id === props.activeDotId) {
 			modalClasses.push("show")
+			dotClasses.push("pulse")
 		}
 		return (
-
-  			<li style={dotStyle} className="z-depth-3 circle dot" onClick={this.props.setDotActive}>
-					<div data-i={this.props.index} className="dot teal accent-3 circle" onClick={this.toggleModal}></div>
+  			<li style={dotStyle} className="circle dot">
+					<div  data-id={this.props.id} className={dotClasses.join(' ')} onClick={this.toggleModal}></div>
 					<div className={modalClasses.join(' ')}>
 						<button className="btn red btn-small" onClick={this.toggleModal}>X</button>
 					</div>

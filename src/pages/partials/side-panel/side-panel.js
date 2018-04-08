@@ -16,7 +16,7 @@ class SidePanel extends Component {
 		  			className="side-panel-container">
 					<div className="close-panel-btn circle btn-floating"></div>
 					<Header/>
-					<Options/>
+					<Options activeDotId={this.props.activeDotId} />
 					<Footer/>
 				</Resizable>
 			</aside>

@@ -1,8 +1,5 @@
 $circle-btn-size: 50px;
 
-
-
-
 #control-panel{
   position: fixed;
   height: 100%;
@@ -86,15 +83,16 @@ $circle-btn-size: 50px;
     max-height: 0;
     overflow: hidden;
     margin: 1em -1em 0em -1em;
-    .col.s12{
-      padding: 0
-    }
     .row{
       padding: 0em 0.75em;
+      margin-bottom: 0;
+      form.s12{
+        margin-top: 0.75rem;
+        .input-submit-feild{
+          margin: 0;
+        }
+      }
     }
-    .input-field{
-        margin: 0;
-        padding: 0;
-    }
+
   }
 }

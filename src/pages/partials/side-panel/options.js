@@ -14,7 +14,7 @@ export default class Options extends Component {
 		    <ul>
 					<ListItem title="Active units" getOption={() => (<ActiveUnits />)}/>
 					<ListItem title="All units" getOption={() => (<AllUnits />)}/>
-					<ListItem title="New time" getOption={() => (<NewTime />)}/>
+					<ListItem title="New time" getOption={() => (<NewTime  activeDotId={this.props.activeDotId} />)}/>
 
 				</ul>
       </div>

@@ -4,6 +4,8 @@ import SidePanel from './partials/side-panel/side-panel'
 import Map from './partials/map/active-map'
 import DotUnit from "./partials/dashboard/dot-unit-item"
 
+import M from "../libs/materialize-src/js/bin/materialize.min"
+
 export default class Dashboard extends React.Component {
 	constructor(){
 		super()
@@ -18,6 +20,7 @@ export default class Dashboard extends React.Component {
 	}
 
 	componentWillMount(){
+
 		let units = JSON.parse(localStorage.getItem("units")),
 				mapSrc = localStorage.getItem("activeMapSrc")
 
@@ -28,36 +31,43 @@ export default class Dashboard extends React.Component {
 			this.setState({ activeMapSrc: mapSrc })
 		}
 	}
-	readDots( item, i ){
+	readDots( item, id ){
 
 		if ( item ) {
 
-			let x = item.coords.x
-			let y = item.coords.y
+			let x = item.coords.x,
+					y = item.coords.y
 
 			return (
-			<DotUnit key={ i }
-					 index={ i }
-					 left={ x + 'px'}
-					 top={ y + 'px'}
-					 setDotActive={ this.setDotActive }
-					 />
+			<DotUnit
+					key={ id }
+					id={ item.id }
+					activeDotId={ this.state.activeDot }
+					left={ x + 'px'}
+					top={ y + 'px'}
+					/>
 			)
 		}
 	}
 	setDotActive(e){
-		this.setState({ activeDot: e.target.dataset.i })
+		let id = -1
+		if ("id" in e.target.dataset) {
+			id = parseInt(e.target.dataset.id)
+		}
+		this.setState({ activeDot: id })
 	}
 	render() {
-		const units = this.state.units.dots || []
-		const imageSrc = this.state.imageSrc || ""
+
+		const units = this.state.units.dots,
+					imageSrc = this.state.imageSrc
+
 		return (
 			<main className="main-container grey darken-4">
 				<div className="overlay-container">
-					<ul className="dot-container" ref={this.dotContainer}>
+					<ul className="dot-container" onClick={this.setDotActive} ref={this.dotContainer}>
 						{units.map(this.readDots)}
 					</ul>
-					<SidePanel />
+					<SidePanel activeDotId={this.state.activeDot} />
 				</div>
 				<Map src={imageSrc}/>
 			</main>
