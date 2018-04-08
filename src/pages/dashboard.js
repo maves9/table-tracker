@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, IndexRoute,  Route, Link } from 'react-router-dom'
-import SidePanel from './partials/side-panel/side-panel'
+import SidePanel from './partials/dashboard/side-panel/side-panel'
 import Map from './partials/map/active-map'
 import DotUnit from "./partials/dashboard/dot-unit-item"
 

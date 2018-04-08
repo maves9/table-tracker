@@ -96,3 +96,14 @@ $circle-btn-size: 50px;
 
   }
 }
+.datepicker-date-display,
+.timepicker-digital-display{
+flex: auto;
+width: 200px;
+}
+.datepicker-day-button{
+  color: #999
+}
+.is-selected .datepicker-day-button{
+  color: #fff
+}

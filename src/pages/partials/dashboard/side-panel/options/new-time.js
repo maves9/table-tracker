@@ -57,9 +57,9 @@ export default class NewTime extends Component {
 			timeFrom.value  = ""
 			timeTo.value    = ""
 			nameInput.value = ""
-			M.toast({html: 'New time added'})
+			M.toast({html: 'New time added', classes: 'green'})
 		}else {
-			M.toast({html: 'Please fill out all the feilds'})
+			M.toast({html: 'Please fill out all the feilds',  classes: 'red'})
 		}
 this.forceUpdate()
 	}
