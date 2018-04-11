@@ -2,32 +2,7 @@ import React, { Component } from 'react'
 import Reservation from "./unit-item-reservation"
 
 export default class UnitItem extends Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			toggleExpand: false
-		}
 
-		this.toggleExpand = this.toggleExpand.bind(this)
-
-	}
-	componentDidMount() {
-		if (this.state.toggleExpand) {
-			this.state.optionContainerHeight = this.optionContainer.scrollHeight
-		}
-	}
-	toggleExpand(){
-		this.setState(prevState => ({
-			toggleExpand: !prevState.toggleExpand
-		}));
-
-		if (this.state.toggleExpand === false) {
-			this.state.optionContainerHeight = this.optionContainer.scrollHeight
-		}else {
-			this.state.optionContainerHeight = 0
-		}
-
-	}
 
 	render() {
 
@@ -35,12 +10,12 @@ export default class UnitItem extends Component {
 
 		return (
       <li>
-				<div className="unit-list-item-header blue-grey darken-4" onClick={this.toggleExpand}>
+				<div className="unit-list-item-header blue-grey darken-4  collapsible-header">
 					<strong>{this.props.unitItem.name}</strong>
 				</div>
-
+				<div className="collapsible-body">
 					{reservations.length ?
-							<div className="expand-container" ref={element => this.optionContainer = element} style={{maxHeight: this.state.optionContainerHeight+"px"}}>
+							<div className="expand-container">
 									<table className="reservation-table">
 										<thead>
 											<tr>
@@ -59,6 +34,7 @@ export default class UnitItem extends Component {
 						:
 						<p>No reservations for this Unit</p>
 					}
+					</div>
 
       </li>
 		)

@@ -4,8 +4,11 @@ import Clock from 'react-live-clock'
 let dotData = JSON.parse(localStorage.getItem('units'))
 
 export default class NewTime extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
+
+		this.state = {unitsObj: this.props.unitsObj}
+
 		this.setNewTime = this.setNewTime.bind(this)
 		this.datePicker = React.createRef()
 		this.timeFrom = React.createRef()
@@ -15,19 +18,22 @@ export default class NewTime extends Component {
 	componentDidMount(){
 		const dateInput = this.datePicker.current,
 					timeFrom = this.timeFrom.current,
-					timeTo = this.timeTo.current
+					timeTo = this.timeTo.current,
+					todaysDate  = new Date,
+					timepickerOptions = {defaultTime: "now", autoClose: true, twelveHour: false},
+					datePickerOptions = {format: "dd-mm-yyyy", minDate: todaysDate, defaultDate: todaysDate, firstDay: 1}
 
-		M.Datepicker.init( dateInput, {format: "dd-mm-yyyy"} )
-		M.Timepicker.init( timeFrom, {defaultTime: "now", autoClose: true} )
-		M.Timepicker.init( timeTo, {defaultTime: "now", autoClose: true} )
+		M.Datepicker.init( dateInput, datePickerOptions  )
+		M.Timepicker.init( timeFrom, timepickerOptions )
+		M.Timepicker.init( timeTo, timepickerOptions )
 	}
 
 	setNewTime(e){
 		e.preventDefault()
 
 		const dateInput = this.datePicker.current,
-					timeFrom = this.timeFrom.current,
-					timeTo = this.timeTo.current,
+					timeFrom  = this.timeFrom.current,
+					timeTo    = this.timeTo.current,
 				  nameInput = this.nameInput.current
 
 		if (dateInput.value !== "" &&
@@ -41,27 +47,29 @@ export default class NewTime extends Component {
 				timeFrom: timeFrom.value,
 				timeTo: timeTo.value
 			}
-			let dotData = JSON.parse(localStorage.getItem('units'))
 
-
-			dotData.dots.map( (item, i) => {
-
+			this.state.unitsObj.map( (item, i) => {
 				if (this.props.activeDotId === item.id) {
 					item.reservations.push(obj)
 				}
-
 			})
-			localStorage.setItem('units', JSON.stringify(dotData))
+
+			this.props.setUnitsObj(this.state.unitsObj)
 
 			dateInput.value = ""
 			timeFrom.value  = ""
 			timeTo.value    = ""
 			nameInput.value = ""
+
 			M.toast({html: 'New time added', classes: 'green'})
+
 		}else {
+			dateInput.blur()
+			timeFrom.blur()
+			timeTo.blur()
+			nameInput.blur()
 			M.toast({html: 'Please fill out all the feilds',  classes: 'red'})
 		}
-this.forceUpdate()
 	}
 
 
@@ -69,21 +77,19 @@ this.forceUpdate()
 		const activeDotBox = () => {
 			if (this.props.activeDotId !== -1) {
 				return (
-					<div className="row">
 						<div className="input-submit-field col s12">
-							<p>Active unit: {this.props.activeDotId}</p>
-							<button type="submit" onClick={this.setNewTime} className="btn btn-small">Submit</button>
+							<p>Active unit: {this.props.activeDotId}
+								<button type="submit" onClick={this.setNewTime} className="btn btn-small right">Submit</button>
+							</p>
 						</div>
-					</div>
 				)
 			}else {
 				return (
-					<div className="row">
 						<div className="input-submit-field col s12">
-							<p>Please choose a dot</p>
-							<button className="btn btn-small disabled">Submit</button>
+							<p>Please choose a unit
+								<button className="btn btn-small disabled right">Submit</button>
+							</p>
 					</div>
-				</div>
 				)
 			}
 		}
@@ -92,8 +98,7 @@ this.forceUpdate()
 
 		return (
 			<div className="row">
-				<form className="col s12">
-				<div className="row">
+				<form>
 					<div className="input-field col s12">
 						<label htmlFor="name">Name </label>
 						<input type="text" id="name" className={inputClasses.join(' ')} ref={this.nameInput} />
@@ -110,10 +115,7 @@ this.forceUpdate()
 							<label htmlFor="time-to">To </label>
 							<input id="time-to" type="text" ref={this.timeTo} className={inputClasses.join(' ')} />
 						</div>
-					</div>
-
 					{activeDotBox()}
-
 				</form>
 			</div>
 		)

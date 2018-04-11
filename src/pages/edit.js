@@ -188,7 +188,7 @@ export default class Edit extends React.Component {
 
 				</ul>
 				<div className="controls blue-grey darken-4">
-					<Link to={'/'} className="btn btn-small cyan waves-effect waves-light">back to dashboard</Link>
+					<Link to={'/'} className="btn btn-small btn-flat cyan waves-effect waves-light">back</Link>
 					<button onClick={this.newDot} className="btn waves-effect waves-light">New unit</button>
 					<button onClick={this.toggleModal} className={editBtnClasses.join(' ')}>Edit unit</button>
 					<button onClick={this.clearDots} className="btn red waves-effect waves-light right">Clear all units</button>

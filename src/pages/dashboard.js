@@ -17,6 +17,13 @@ export default class Dashboard extends React.Component {
 		}
 		this.setDotActive = this.setDotActive.bind(this)
 		this.readDots = this.readDots.bind(this)
+		this.setUnitsObj = this.setUnitsObj.bind(this)
+	}
+	componentDidUpdate(){
+	}
+	setUnitsObj(unitsObj){
+		this.setState({ units: unitsObj })
+		localStorage.setItem("units", JSON.stringify({dots: unitsObj}))
 	}
 
 	componentWillMount(){
@@ -25,7 +32,7 @@ export default class Dashboard extends React.Component {
 				mapSrc = localStorage.getItem("activeMapSrc")
 
 		if (units !== null) {
-			this.setState({ units: units })
+			this.setState({ units: units.dots })
 		}
 		if (mapSrc !== null) {
 			this.setState({ activeMapSrc: mapSrc })
@@ -58,7 +65,7 @@ export default class Dashboard extends React.Component {
 	}
 	render() {
 
-		const units = this.state.units.dots,
+		const units = this.state.units,
 					imageSrc = this.state.imageSrc
 
 		return (
@@ -67,7 +74,11 @@ export default class Dashboard extends React.Component {
 					<ul className="dot-container" onClick={this.setDotActive} ref={this.dotContainer}>
 						{units.map(this.readDots)}
 					</ul>
-					<SidePanel activeDotId={this.state.activeDot} unitsObj={this.state.units.dots}/>
+					<SidePanel
+						activeDotId={this.state.activeDot}
+						unitsObj={this.state.units}
+						setUnitsObj={this.setUnitsObj}
+						/>
 				</div>
 				<Map src={imageSrc}/>
 			</main>

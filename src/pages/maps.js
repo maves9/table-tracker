@@ -32,16 +32,16 @@ export default class Maps extends React.Component {
 	componentDidUpdate(){
 		this.saveMaps()
 	}
-
 	getMap(){
-		let mapList = this.state.mapList
-		let url = this.textInput.current.value
-		mapList.push({ src: url})
+		let mapList = this.state.mapList,
+		 		url = this.textInput.current.value
+		console.log(mapList.maps);
+		mapList.maps.push({src: url})
 		this.setState({mapList: mapList})
 	}
 	removeMap(i){
 		let mapList = this.state.mapList
-		mapList.splice(i, 1)
+		mapList.maps.splice(i, 1)
 		this.setState({mapList: mapList})
 	}
 	readMaps(item, i){
@@ -59,6 +59,7 @@ export default class Maps extends React.Component {
 	activate(i){
 		let imageSrc = this.state.mapList[i].src
 		localStorage.setItem("activeMapSrc", imageSrc)
+		M.toast({html: 'New active pictue'})
 	}
 	saveMaps(){
 		let list = this.state.mapList
@@ -74,19 +75,18 @@ export default class Maps extends React.Component {
 		localStorage.setItem("mapList", JSON.stringify(mapListData));
 	}
 	render() {
+		let mapList = this.state.mapList.maps
 		return (
 				<main className="main-container white-text grey darken-4">
 
-					<h1>maps</h1>
-
-					<ul ref={this.mapListContainer} >
-						{this.state.mapList.map(this.readMaps)}
+					<ul className="container" ref={this.mapListContainer} >
+						{mapList.length ? mapList.map(this.readMaps) : <p className="h5">No maps found</p>}
 					</ul>
 
 					<div className="controls map-controls blue-grey darken-4">
-						<Link to={'/'}>back to dashboard</Link>
 							<input type="text" ref={this.textInput} className="white-text" placeholder="Enter image URL here" />
 							<button onClick={this.getMap} className="btn">Get map</button>
+							<Link className="btn btn-small right blue" to={'/'}>back to dashboard</Link>
 					</div>
 
 				</main>
