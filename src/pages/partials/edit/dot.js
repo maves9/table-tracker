@@ -29,6 +29,8 @@ export default class Dot extends Component {
 				})
 			)
 		}.bind(this), 400 )
+
+		this.props.save()
 	}
 	render() {
 

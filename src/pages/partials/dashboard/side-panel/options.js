@@ -21,9 +21,9 @@ export default class Options extends Component {
 		return (
       <div className="options-list">
 		    <ul data-js="collapsible" className="collapsible expandable">
-					<ListItem title="Active units" amount={this.props.unitsObj.length} getOption={() =>(<ActiveUnits unitsObj={this.state.unitsObj}/>)} />
-					<ListItem title="All units" amount={this.props.unitsObj.length} getOption={() => (<AllUnits unitsObj={this.state.unitsObj} />)} />
-					<ListItem title="New time" amount={this.props.unitsObj.length} getOption={() => (<NewTime  unitsObj={this.state.unitsObj} activeDotId={this.props.activeDotId} setUnitsObj={this.props.setUnitsObj}/> )} />
+					<ListItem title="Active units" getOption={() =>(<ActiveUnits unitsObj={this.state.unitsObj}/>)} />
+					<ListItem title="All units" getOption={() => (<AllUnits unitsObj={this.state.unitsObj} />)} />
+					<ListItem title="New time" getOption={() => (<NewTime  unitsObj={this.state.unitsObj} activeDotId={this.props.activeDotId} setUnitsObj={this.props.setUnitsObj}/> )} />
 				</ul>
       </div>
 		)

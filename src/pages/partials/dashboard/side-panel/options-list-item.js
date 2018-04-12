@@ -17,18 +17,19 @@ export default class ListItem extends Component {
 	render() {
 		let btnClasses = ['btn', 'btn-plus', 'btn-flat'],
 				containerClasses = ['main-container'],
-				itemClasses = ["control-list-item", "h6"]
+				headerClasses = ["control-list-header", "collapsible-header", "blue-grey", "darken-3"]
 
 		if(this.state.toggleExpand){
+			console.log('hi');
 			btnClasses.push('to-minus')
-			itemClasses.push("blue-grey", "darken-2")
+			headerClasses.push("blue-grey", "darken-2")
 		}
 
 		return (
-			<li className={itemClasses.join(' ')}>
-				<div className="control-list-header collapsible-header blue-grey darken-3">
+			<li className="control-list-item h6">
+				<div className={headerClasses.join(' ')} onClick={this.toggleExpand}>
 					<p className="control-list-title">{this.props.title}</p>
-					<button className={btnClasses.join(' ') }>
+					<button className={ btnClasses.join(' ') }>
 						<span></span>
 						<span></span>
 					</button>

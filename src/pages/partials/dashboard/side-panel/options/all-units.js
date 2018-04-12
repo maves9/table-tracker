@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Unit from "./partials/unit-item"
 export default class AllUnits extends Component {
 
-	componentDidMount(){console.log(this.props);
+	componentDidMount(){
 		const UL = document.querySelector('[data-js=subCollapsible]');
 		M.Collapsible.init( UL, {
 			accordion: false
@@ -10,11 +10,13 @@ export default class AllUnits extends Component {
 	}
 
 	render() {
+		const units = this.props.unitsObj
 		return (
 			<ul data-js="subCollapsible" className="option-all-units-list collapsible expandable">
-				{this.props.unitsObj.map(
+				{units.length ?
+					units.map(
 						(item, i) => (<Unit key={ i } unitItem={ item }/>)
-				)}
+				) : <p>No units found</p>}
 			</ul>
 		)
 	}

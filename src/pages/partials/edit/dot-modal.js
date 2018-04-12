@@ -13,7 +13,10 @@ export default class DotModal extends Component {
     this.nameInput = React.createRef()
 	}
 	componentDidMount(){
-		this.setState({ inputValue: this.props.obj.name })
+		if ("name" in  this.props.obj) {
+
+			this.setState({ inputValue: this.props.obj.name })
+		}
 	}
 
   closeModal(e){

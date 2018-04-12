@@ -1,15 +1,19 @@
-$circle-btn-size: 50px;
+$circle-btn-size: 40px;
 
 #control-panel{
+
   position: fixed;
   height: 100%;
+  transition: .4s all;
 
-  &:hover .close-panel-btn{opacity: 1; display: none;}
+  &.slide-hide{ transform: translateX(-100%); .close-panel-btn{opacity: 1;height: $circle-btn-size; i {transition: ease-in-out .3s all; transform: rotate(180deg) translateX(-8px);}}}
+
+  &:hover .close-panel-btn{opacity: 1; height: $circle-btn-size; }
 
   .close-panel-btn{
     opacity: 0;
     width: $circle-btn-size;
-    height: $circle-btn-size;
+    height: 0;
     position: absolute;
     margin: auto;
     bottom: 0;
@@ -42,7 +46,7 @@ $circle-btn-size: 50px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #fff;
+      background-color: #DFDFDF;
       border-radius: 4px;
     }
 

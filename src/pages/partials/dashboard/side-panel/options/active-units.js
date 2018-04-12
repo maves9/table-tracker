@@ -18,7 +18,7 @@ export default class Options extends Component {
 		this.setState({activeReservations: activeReservations})
 	}
 	componentDidUpdate(prevState){
-		console.log(prevState);
+		//console.log(prevState);
 		if (prevState.allUnits ===  this.props.unitsObj) {
 
 		const allUnits =  this.props.unitsObj,
@@ -44,19 +44,19 @@ export default class Options extends Component {
 		const activeReservations = []
 
 		let d = new Date(),
-				currentHour = d.getHours(),
+				currentHour   = d.getHours(),
 				currentMinute = d.getMinutes(),
-				currentDay = d.getDate(),
+				currentDay    = d.getDate(),
 				currentMounth = d.getMonth()+1, //January is 0
-				currentYear = d.getFullYear()
+				currentYear   = d.getFullYear()
 
 		obj.map((reservation) => {
 
 
 			let dateArr = reservation.date.split('-'),
-					rDay = parseInt(dateArr[0]),
+					rDay    = parseInt(dateArr[0]),
 					rMounth = parseInt(dateArr[1]),
-					rYear = parseInt(dateArr[2])
+					rYear   = parseInt(dateArr[2])
 
 
 			if (currentDay >= rDay &&
@@ -68,13 +68,12 @@ export default class Options extends Component {
 					finishHour   = parseInt(reservation.timeTo.slice(0,2)),
 					finishMinute = parseInt(reservation.timeTo.slice(3,5))
 
-
-				if (currentHour >= startHour &&
+				if (currentHour   >= startHour   &&
 						currentMinute >= startMinute &&
-						currentHour <= finishHour &&
-						currentMinute <= finishMinute ) {
-							activeReservations.push(reservation)
-
+						currentHour   <= finishHour  &&
+						currentMinute <= finishMinute )
+				{
+					activeReservations.push(reservation)
 				}
 			}
 		})
@@ -86,9 +85,13 @@ export default class Options extends Component {
 		let reservations = this.state.activeReservations
 		return (
 			<ul className="collection">
-			{ reservations.map((reservation, i) => {
-				return (<li key={ i } className="collection-item blue-grey darken-3">{reservation.name} <br/> <small>( from: {reservation.timeFrom} to: {reservation.timeTo} )</small></li>)
-			})}
+			{ reservations.length ?
+					reservations.map((reservation, i) => {
+						return (<li key={ i } className="collection-item blue-grey darken-3">{reservation.name} <br/> <small>( from: {reservation.timeFrom} to: {reservation.timeTo} )</small></li>)
+					})
+				:
+				<li className="collection-item blue-grey darken-3">No active units</li>
+			}
 	    </ul>
 		)
 	}

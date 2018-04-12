@@ -30,13 +30,13 @@ export default class Edit extends React.Component {
 		}
 	}
 	componentDidUpdate(){
-		this.saveDots()
+		localStorage.setItem("units",  JSON.stringify({dots:this.state.dots}))
 	}
 
 	toggleActiveUnit(e){
 
-		let bool = true
-		let id = e.target.dataset.id
+		let bool = true,
+			  id = e.target.dataset.id
 
 		if (e.target.nodeName === "UL") {
 			id = -1
@@ -56,11 +56,9 @@ export default class Edit extends React.Component {
 			}
 		})
 
-		dotData.dots = dots
-
 		this.setState( prevState => ({
 				editModalOpen: !prevState.editModalOpen,
-				dots: dotData.dots,
+				dots: dots,
 				activeDotIndex: -1
 		}));
 	}
@@ -70,7 +68,7 @@ export default class Edit extends React.Component {
 		if (dot) {
 
 		let x = dot.coords.x,
-		 		y = dot.coords.y
+				y = dot.coords.y
 
 		return (
 			<Dot key={ i }
@@ -78,34 +76,33 @@ export default class Edit extends React.Component {
 					 left={ x + 'px'}
 					 top={ y + 'px'}
 					 remove={this.removeDot}
+					 save={this.saveDots}
 					 toggleActive={this.toggleActiveUnit}
 					 />
 			)
 		}
 	}
 	newDot(){
+		console.log(this);
 		let dots = this.state.dots,
-				id = 0
+				id = this.state.dots.length
 
-		if(this.state.dots !== undefined){
-			id = this.state.dots.length + 1
-		}
 		dots.push({
 			id: id,
-			name: "Unit " + id ,
+			name: ("Unit " + id) ,
 			reservations: [],
 			coords: { x: 0, y: 0}
 		})
+
 		this.setState({ dots: dots })
 	}
-	clearDots(){
-		this.setState({ dots: [] })
-	}
-	saveDots(){
-		let children = this.dotContainer.current.children,
-		 		dotData = {}
 
-		dotData.dots = []
+	clearDots(){ this.setState({ dots: [] }) }
+
+	saveDots(){
+
+		let children = this.dotContainer.current.children,
+		 		dots = this.state.dots
 
 		for (let li in children) {
 			if (children[li].attributes) {
@@ -118,31 +115,32 @@ export default class Edit extends React.Component {
 				 		transformValue = styleValue.slice(index, styleValue.lastIndexOf(")", index) )
 
 				let translateValues = transformValue.slice(
-					transformValue.indexOf('(') + 1,
-					transformValue.indexOf(')')
-				)
+																transformValue.indexOf('(') + 1,
+																transformValue.indexOf(')')
+															)
 
 				let translateValuesArr = translateValues.split(",")
 
 				let x = parseInt( translateValuesArr[0] ),
 				 		y = parseInt( translateValuesArr[1] ),
-						dot = { coords: { x: x, y: y } }
-
-				dotData.dots[li] = dot
+						newCoords = { x: x, y: y }
+						dots[li].coords = newCoords
 			}
 		}
-
 		//
 		// Apply dot names
 		//
-		dotData.dots.map((dot, i) => {
+		dots.map((dot, i) => {
+			if (dot.id === this.state.dots[i].id) {
 
 				dot.name = this.state.dots[i].name
 				dot.id = this.state.dots[i].id
 				dot.reservations = []
+			}
 		})
 
-		localStorage.setItem("units", JSON.stringify(dotData));
+
+		this.setState({ dots: dots })
 	}
 
 	toggleModal(e, dot){
@@ -159,6 +157,7 @@ export default class Edit extends React.Component {
 
 		}
 	}
+
 
 	render() {
 
@@ -188,13 +187,19 @@ export default class Edit extends React.Component {
 
 				</ul>
 				<div className="controls blue-grey darken-4">
-					<Link to={'/'} className="btn btn-small btn-flat cyan waves-effect waves-light">back</Link>
-					<button onClick={this.newDot} className="btn waves-effect waves-light">New unit</button>
-					<button onClick={this.toggleModal} className={editBtnClasses.join(' ')}>Edit unit</button>
-					<button onClick={this.clearDots} className="btn red waves-effect waves-light right">Clear all units</button>
+					<Link to={'/'} className="btn btn-small btn-flat blue waves-effect waves-light"><i className="material-icons left">arrow_back</i>back</Link>
+					<button onClick={this.newDot} className="btn waves-effect waves-light">
+						<i className="material-icons left">add</i>New unit
+					</button>
+					<button onClick={this.toggleModal} className={editBtnClasses.join(' ')}>
+						<i className="material-icons left">mode_edit</i>Edit unit
+					</button>
+					<button onClick={this.clearDots} className="btn red waves-effect waves-light right">
+						<i className="material-icons left">delete_forever</i>Clear all
+					</button>
 				</div>
-				</div>
-			</main>
+			</div>
+		</main>
 		)
 	}
 }

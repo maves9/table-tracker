@@ -9,13 +9,12 @@ export default class Maps extends React.Component {
 			mapList: [],
 			activeMapSrc: ""
 		}
-		this.readMaps = this.readMaps.bind(this)
-		this.saveMaps = this.saveMaps.bind(this)
-
-		this.getMap = this.getMap.bind(this)
-		this.removeMap = this.removeMap.bind(this)
-		this.activate = this.activate.bind(this)
-		this.textInput = React.createRef()
+		this.readMaps         = this.readMaps.bind(this)
+		this.saveMaps         = this.saveMaps.bind(this)
+		this.getMap           = this.getMap.bind(this)
+		this.removeMap        = this.removeMap.bind(this)
+		this.activate         = this.activate.bind(this)
+		this.textInput        = React.createRef()
 		this.mapListContainer = React.createRef()
 	}
 	componentWillMount(){
@@ -35,13 +34,12 @@ export default class Maps extends React.Component {
 	getMap(){
 		let mapList = this.state.mapList,
 		 		url = this.textInput.current.value
-		console.log(mapList.maps);
-		mapList.maps.push({src: url})
+		mapList.push({src: url})
 		this.setState({mapList: mapList})
 	}
 	removeMap(i){
 		let mapList = this.state.mapList
-		mapList.maps.splice(i, 1)
+		mapList.splice(i, 1)
 		this.setState({mapList: mapList})
 	}
 	readMaps(item, i){
@@ -75,7 +73,7 @@ export default class Maps extends React.Component {
 		localStorage.setItem("mapList", JSON.stringify(mapListData));
 	}
 	render() {
-		let mapList = this.state.mapList.maps
+		let mapList = this.state.mapList
 		return (
 				<main className="main-container white-text grey darken-4">
 
