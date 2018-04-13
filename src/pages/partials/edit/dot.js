@@ -29,6 +29,8 @@ export default class Dot extends Component {
 				})
 			)
 		}.bind(this), 400 )
+
+		this.props.save()
 	}
 	render() {
 
@@ -57,7 +59,7 @@ export default class Dot extends Component {
 				bounds="parent"
         >
 
-  			<li className={ dotClasses.join(' ') } data-i={ i }>
+  			<li className={ dotClasses.join(' ') } data-id={ this.props.obj.id }>
           <div className="dot-modal">
             <button className="btn red btn-small" onClick={() => this.props.remove(i)}>Delete</button>
           </div>

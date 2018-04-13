@@ -1,18 +1,19 @@
-$circle-btn-size: 50px;
-
-
-
+$circle-btn-size: 40px;
 
 #control-panel{
+
   position: fixed;
   height: 100%;
+  transition: .4s all;
 
-  &:hover .close-panel-btn{opacity: 1; display: none;}
+  &.slide-hide{ transform: translateX(-100%); .close-panel-btn{opacity: 1;height: $circle-btn-size; i {transition: ease-in-out .3s all; transform: rotate(180deg) translateX(-8px);}}}
+
+  &:hover .close-panel-btn{opacity: 1; height: $circle-btn-size; }
 
   .close-panel-btn{
     opacity: 0;
     width: $circle-btn-size;
-    height: $circle-btn-size;
+    height: 0;
     position: absolute;
     margin: auto;
     bottom: 0;
@@ -34,6 +35,10 @@ $circle-btn-size: 50px;
   .options-list{
     overflow-y: auto;
     max-height: 73%;
+    .collapsible{
+      border: none;
+      box-shadow: none;
+    }
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -41,10 +46,32 @@ $circle-btn-size: 50px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #fff;
+      background-color: #DFDFDF;
       border-radius: 4px;
     }
+
+    .option-all-units-list{
+      margin: 0;
+      padding: 2rem;
+      .collapsible-body{
+        margin-top: 0.5em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
+      .collapsible-body,
+      .collapsible-header{
+        border: none;
+      }
+    }
   }
+  .collapsible-body{
+    padding: 0;
+  }
+  .collapsible-body,
+  .collapsible-header{
+    outline: none;
+  }
+
 
   .control-list-item{
     padding: 0.5em 1em;
@@ -57,16 +84,14 @@ $circle-btn-size: 50px;
       padding-top: 1em;
     }
     .control-list-header{
-      min-height: 50px;
+
       button{
         position: absolute;
-        right: 1em;
-        top: 1em;
+        right: 2em;
+        top: 2em;
       }
     }
-    & + .control-list-item{
-      border-top: solid 1px #eee;
-    }
+
 
   }
 
@@ -82,19 +107,49 @@ $circle-btn-size: 50px;
     }
   }
   .option-container{
-    transition: .4s all ease-in-out;
-    max-height: 0;
     overflow: hidden;
     margin: 1em -1em 0em -1em;
-    .col.s12{
-      padding: 0
-    }
     .row{
       padding: 0em 0.75em;
+      form.s12{
+        margin-top: 0.75rem;
+        .input-submit-feild{
+          margin: 0;
+        }
+      }
     }
-    .input-field{
-        margin: 0;
-        padding: 0;
-    }
+
+  }
+}
+.datepicker-date-display,
+.timepicker-digital-display{
+flex: auto;
+width: 200px;
+}
+.datepicker-day-button{
+  color: rgba(0, 0, 0, 0.87);
+}
+.is-disabled .datepicker-day-button{
+    color: #999
+}
+.is-selected .datepicker-day-button{
+  color: #fff
+}
+.option-all-units-list{
+  li + li {
+    margin-top: 0.5em;
+  }
+  margin: 0.5em;
+  .unit-list-item-header{
+    cursor: pointer;
+    padding: 0.5em;
+    margin: -0.5em;
+  }
+  .expand-container{
+    transition: .4s all ease-in-out;
+    overflow: hidden;
+  }
+  .reservation-table{
+      margin: 0.5em 0;
   }
 }
