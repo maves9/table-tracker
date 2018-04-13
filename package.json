@@ -4,7 +4,9 @@
   "description": "A project to learn how to work with webpack",
   "main": "index.js",
   "scripts": {
-    "build": "webpack && serve",
+    "start": "node server.js",
+    "postinstall": "webpack -p",
+    "build": "webpack -p",
     "dev": "webpack-dev-server",
     "watch": "webpack --w",
     "debug": "webpack --progress --color --watch --display-error-details"
